@@ -10,7 +10,6 @@ router.post("/crear/marca", async (req, res) => {
     if (nombre_marca ===""){
         return res.status(500).send("El nombre de la marca no puede estar vacio")
     }    
-    console.log(Object.keys(req.body).join())
     const resultado= await conection.query(`
     INSERT INTO marca (${Object.keys(req.body).join()})
     VALUES(?,?,?);`,Object.values(req.body))      

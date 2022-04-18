@@ -16,7 +16,7 @@ app.use('/api',require('./routes/listar'));
 app.use('/api',require('./routes/eliminar'));
 
 // Establecer puerto
-app.set('port', process.env.PORT);
+app.set('port', process.env.PORT || 4000);
 
 // Iniciar el servidor
 app.listen(app.get('port'), () => {

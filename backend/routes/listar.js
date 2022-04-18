@@ -30,27 +30,24 @@ router.get("/listar/modelos", async (req, res) => {
   }
 });
 
-router.get("/listar/fechas", async (req, res) => {
+router.post("/listar/fechas", async (req, res) => {
   try {
-    const { fecha_ini, fecha_fin } = req.body;
-    console.log(fecha_ini, fecha_fin);
+    const { fecha_ini, fecha_fin } = req.body;    
     const [result] = await conection.query(
       `SELECT * FROM vehiculo WHERE fecha_ven_seguro BETWEEN '${fecha_ini}' AND '${fecha_fin}'`
-    );
-    console.log(result);
+    );    
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json("Error en el servidor");
   }
 });
 
-router.get("/listar/filterModelos", async (req, res) => {
+router.post("/listar/filterModelos/", async (req, res) => {
   try {
     const { modelo_1, modelo_2 } = req.body;
     const [result] = await conection.query(
       `SELECT * FROM vehiculo WHERE modelo BETWEEN '${modelo_1}' AND '${modelo_2}'`
-    );
-    console.log(result);
+    );    
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json("Error en el servidor");
@@ -73,9 +70,8 @@ router.get("/listar/sumModelos", async (req, res) => {
   try {
     const [resultado] = await conection.query(
       `SELECT SUM(modelo) suma FROM vehiculo;`
-    );    
-    let {suma} = resultado[0];    
-    res.status(200).json(suma);
+    );            
+    res.status(200).json(resultado);
   } catch (error) {
     res.status(500).json("Error en el servidor");
   }
@@ -85,9 +81,8 @@ router.get("/listar/promediar", async (req, res) => {
   try {
     const [resultado] = await conection.query(
       `SELECT AVG(modelo) promedio FROM vehiculo;`
-    );    
-    let {promedio} = resultado[0];           
-    res.status(200).json((parseFloat(promedio)).toFixed(2));
+    );       
+    res.status(200).json(resultado);
   } catch (error) {
     res.status(500).json("Error en el servidor");
   }
@@ -100,10 +95,8 @@ router.get("/listar/contar", async (req, res) => {
     );
     const [resNoActivo] = await conection.query(
       `SELECT COUNT(estado) contarInactivo FROM linea WHERE estado="N";`
-    ); 
-    let {contarActivo} = resActivo[0];
-    let {contarInactivo} = resNoActivo[0]
-    let contar = [contarActivo,contarInactivo]
+    );     
+    let contar = [resActivo[0],resNoActivo[0]]
 
     res.status(200).json(contar);
   } catch (error) {
