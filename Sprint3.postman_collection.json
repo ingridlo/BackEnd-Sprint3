@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"nombre_marca\": \"Toyota\",\r\n        \"estado\": \"S\",\r\n        \"descripcion\": \"Marca Japonesa\"\r\n    }",
+					"raw": "    {\r\n        \"nombre_marca\": \"Toyota\",\r\n        \"estado\": \"S\",\r\n        \"descripcionM\": \"Marca Japonesa\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"

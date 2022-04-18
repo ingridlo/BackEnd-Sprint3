@@ -38,7 +38,7 @@ formCL.addEventListener("submit", (e) => {
   id_marca: document.getElementById('idmarcaL').value,
   }    
   crear('linea',data)
-  formCV.reset();
+  formCL.reset();
 });
 
 crearM.addEventListener("click", () => {
@@ -47,9 +47,16 @@ crearM.addEventListener("click", () => {
 
 });
 
-formCL.addEventListener("submit", (e) => {
-  e.preventDefault();
-  formCV.reset();
+formCM.addEventListener("submit", (e) => {
+  e.preventDefault();  
+  data={
+  nombre_marca: document.getElementById('nombreM').value,
+  estado: document.getElementById('estadoM').value,
+  descripcionM: document.getElementById('descripcionM').value
+  }    
+  console.log(data)
+  crear('marca',data)
+  formCM.reset();
 });
 
 listarV.addEventListener("click", () => {
@@ -115,7 +122,6 @@ function listar(urlapi) {
 function crear(urlapi,data) {    
   console.log(`https://app-regvehiculos.herokuapp.com/api/crear/${urlapi}`);
   fetch(`https://app-regvehiculos.herokuapp.com/api/crear/${urlapi}`,{
-    mode: 'no-cors',
     method: "POST",
     body: JSON.stringify(data),
     headers: {"Content-type": "application/json; charset=UTF-8"}   
