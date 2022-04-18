@@ -20,10 +20,10 @@ router.get("/listar/modelos", async (req, res) => {
     const [minimo] = await conection.query(
       `SELECT MIN (modelo) FROM vehiculo;`
     );
-    modelo = {
+    modelo = [{
       maximoModelo: Object.values(maximo[0])[0],
-      minmoModelo: Object.values(minimo[0])[0],
-    };
+      minimoModelo: Object.values(minimo[0])[0],
+    }];
     res.status(200).json(modelo);
   } catch (error) {
     res.status(500).json("Error en el servidor");
